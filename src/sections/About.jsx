@@ -52,13 +52,7 @@ export default function About() {
               started exploring how AI agents and the Model Context Protocol
               (MCP) work under the hood.
             </p>
-            <p>
-              Outside of coursework, I look for hackathons and exhibitions to
-              test what I've learned under real pressure — Hacksagon 2026
-              being the biggest one so far. My goal for the next year is an
-              internship where I can learn from developers who've done this
-              longer than I have, and contribute to open-source along the way.
-            </p>
+            
           </motion.div>
 
           <motion.div
