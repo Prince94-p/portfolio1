@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-base-950 text-slate-200 font-body antialiased;
+}
+
+::selection {
+  @apply bg-emerald-400/30 text-white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #05070a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2430;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3444;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.04] backdrop-blur-xl border border-white/10;
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl shadow-card transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply border-emerald-400/30 -translate-y-1;
+  }
+
+  .section-eyebrow {
+    @apply font-mono text-xs tracking-[0.2em] uppercase text-emerald-400/90;
+  }
+
+  .gradient-text {
+    @apply bg-accent-gradient bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-base-950 bg-accent-gradient
+    shadow-glow hover:shadow-[0_0_50px_rgba(16,185,129,0.35)] hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-200 glass
+    hover:border-cyan-400/40 hover:-translate-y-0.5 transition-all duration-300;
+  }
+
+  .badge {
+    @apply font-mono text-[11px] px-2.5 py-1 rounded-full border;
+  }
+  .badge-comfortable {
+    @apply badge text-emerald-300 bg-emerald-400/10 border-emerald-400/30;
+  }
+  .badge-learning {
+    @apply badge text-cyan-300 bg-cyan-400/10 border-cyan-400/30;
+  }
+  .badge-exploring {
+    @apply badge text-amber-300 bg-amber-400/10 border-amber-400/30;
+  }
+}
