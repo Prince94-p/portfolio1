@@ -3,6 +3,8 @@ import { FiDownload, FiFileText, FiExternalLink } from "react-icons/fi";
 import SectionHeading from "../components/SectionHeading";
 
 export default function Resume() {
+  const resumeUrl = `${import.meta.env.BASE_URL}Prince_Patel_Resume.pdf`;
+
   return (
     <section id="resume" className="py-24">
       <div className="max-w-4xl mx-auto px-6">
@@ -32,14 +34,14 @@ export default function Resume() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
-              href="/Prince_Patel_Resume.pdf"
+              href={resumeUrl}
               download="Prince_Patel_Resume.pdf"
               className="btn-primary shadow-lg shadow-emerald-500/20"
             >
               <FiDownload size={18} /> Download Resume (PDF)
             </a>
             <a
-              href="/Prince_Patel_Resume.pdf"
+              href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-ghost"
