@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { BootLoader } from './components/BootLoader';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
@@ -10,9 +10,13 @@ import { ContactSection } from './components/ContactSection';
 function App() {
   const [isBooted, setIsBooted] = useState(false);
 
+  const handleBootComplete = useCallback(() => {
+    setIsBooted(true);
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-black text-[#E8DFD8] selection:bg-[#cbb59d] selection:text-black">
-      <BootLoader onBootComplete={() => setIsBooted(true)} />
+      <BootLoader onBootComplete={handleBootComplete} />
       <HeroSection isBooted={isBooted} />
       <AboutSection />
       <ProjectsSection />

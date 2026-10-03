@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import heroPrinceImg from '../assets/hero-prince.png';
 import watermarkImg from '../assets/watermark.png';
@@ -8,16 +8,37 @@ interface BootLoaderProps {
   onBootComplete: () => void;
 }
 
+// Module-level persistent flag to guarantee BootLoader runs exactly once per page session
+let hasBootedGlobally = false;
+
 export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
-  const [phase, setPhase] = useState<'booting' | 'ready' | 'exit' | 'done'>('booting');
+  const [phase, setPhase] = useState<'booting' | 'ready' | 'exit' | 'done'>(() => {
+    return hasBootedGlobally ? 'done' : 'booting';
+  });
   const [statusText, setStatusText] = useState('BOOTING PORTFOLIO');
   const [progress, setProgress] = useState(0);
 
+  // Store callback in a ref to prevent effect re-runs if callback identity changes
+  const onBootCompleteRef = useRef(onBootComplete);
+  onBootCompleteRef.current = onBootComplete;
+
+  const animationFrameRef = useRef<number | null>(null);
+  const readyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const doneTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   useEffect(() => {
+    // If already booted in this session, complete immediately and return
+    if (hasBootedGlobally) {
+      onBootCompleteRef.current();
+      setPhase('done');
+      return;
+    }
+
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
-      onBootComplete();
+      hasBootedGlobally = true;
+      onBootCompleteRef.current();
       setPhase('done');
       return;
     }
@@ -27,19 +48,7 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
     document.body.style.overflow = 'hidden';
     window.scrollTo(0, 0);
 
-    // Progress counter simulation
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        const increment = Math.floor(Math.random() * 14) + 8;
-        return Math.min(prev + increment, 100);
-      });
-    }, 70);
-
-    // Preload critical above-the-fold assets
+    // Preload critical assets in background
     const preloadImage = (src: string) =>
       new Promise<void>((resolve) => {
         const img = new Image();
@@ -48,56 +57,70 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
           resolve();
         } else {
           img.onload = () => resolve();
-          img.onerror = () => resolve(); // continue even if an asset fails
+          img.onerror = () => resolve();
         }
       });
 
-    const assetPromises = Promise.all([
-      preloadImage(heroPrinceImg),
-      preloadImage(watermarkImg),
-      preloadImage(aboutImg),
-      document.fonts ? document.fonts.ready : Promise.resolve(),
-    ]);
+    preloadImage(heroPrinceImg);
+    preloadImage(watermarkImg);
+    preloadImage(aboutImg);
+    if (document.fonts) {
+      document.fonts.ready.catch(() => {});
+    }
 
-    // Minimum delay for cinematic feel (950ms) and max safeguard (1800ms)
-    const minDelayPromise = new Promise<void>((resolve) => setTimeout(resolve, 950));
-    const maxTimeoutPromise = new Promise<void>((resolve) => setTimeout(resolve, 1800));
+    // Total target duration: ~5.0 seconds total (4.2s progress + 0.5s SYSTEM READY + 0.7s exit reveal)
+    const PROGRESS_DURATION = 4200;
+    const READY_PAUSE = 500;
+    const startTime = performance.now();
 
-    Promise.race([
-      Promise.all([assetPromises, minDelayPromise]),
-      maxTimeoutPromise,
-    ]).then(() => {
-      setProgress(100);
-      clearInterval(progressInterval);
-      setStatusText('SYSTEM READY');
-      setPhase('ready');
+    const updateProgress = (now: number) => {
+      const elapsed = now - startTime;
+      const currentProgress = Math.min(100, Math.floor((elapsed / PROGRESS_DURATION) * 100));
+      setProgress(currentProgress);
 
-      // Short pause showing "SYSTEM READY" before initiating curtain exit
-      setTimeout(() => {
-        setPhase('exit');
-        onBootComplete();
+      if (elapsed < PROGRESS_DURATION) {
+        animationFrameRef.current = requestAnimationFrame(updateProgress);
+      } else {
+        // Progress reached 100%
+        setProgress(100);
+        setStatusText('SYSTEM READY');
+        setPhase('ready');
 
-        // Unlock scroll after curtain begins revealing
-        setTimeout(() => {
+        readyTimeoutRef.current = setTimeout(() => {
+          setPhase('exit');
+          hasBootedGlobally = true;
+          onBootCompleteRef.current();
+
+          // Unlock scrolling smoothly
           document.documentElement.style.overflow = '';
           document.body.style.overflow = '';
-        }, 150);
 
-        // Remove from DOM once exit animation ends
-        setTimeout(() => {
-          setPhase('done');
-        }, 800);
-      }, 350);
-    });
+          // Transition to done after curtain exit animation ends
+          doneTimeoutRef.current = setTimeout(() => {
+            setPhase('done');
+          }, 750);
+        }, READY_PAUSE);
+      }
+    };
+
+    animationFrameRef.current = requestAnimationFrame(updateProgress);
 
     return () => {
-      clearInterval(progressInterval);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      if (readyTimeoutRef.current) {
+        clearTimeout(readyTimeoutRef.current);
+      }
+      if (doneTimeoutRef.current) {
+        clearTimeout(doneTimeoutRef.current);
+      }
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
     };
-  }, [onBootComplete]);
+  }, []);
 
-  if (phase === 'done') {
+  if (phase === 'done' || hasBootedGlobally && phase !== 'exit') {
     return null;
   }
 
