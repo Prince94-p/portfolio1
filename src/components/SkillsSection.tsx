@@ -59,7 +59,7 @@ const containerVariants: Variants = {
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 25, filter: 'blur(6px)' },
+  hidden: { opacity: 0, y: 20, filter: 'blur(4px)' },
   visible: {
     opacity: 1,
     y: 0,
@@ -77,11 +77,11 @@ export const SkillsSection: React.FC = () => {
   return (
     <section
       id="skills"
-      className="relative w-full bg-black text-[#E8DFD8] font-sans selection:bg-[#cbb59d] selection:text-black py-16 px-6 sm:px-12 lg:px-20 overflow-hidden"
+      className="relative z-10 w-full bg-[#F8F7F4] text-[#141312] font-sans selection:bg-[#EAD8C7] selection:text-[#181614] py-16 px-6 sm:px-12 lg:px-20 overflow-hidden"
     >
-      {/* Ambient Glows */}
-      <div className="absolute top-1/3 left-1/4 w-[34rem] h-[34rem] bg-[#D4AF37]/5 rounded-full blur-[170px] pointer-events-none" />
-      <div className="absolute bottom-10 right-1/4 w-[28rem] h-[28rem] bg-[#8C6D4F]/5 rounded-full blur-[160px] pointer-events-none" />
+      {/* Ambient Tints */}
+      <div className="absolute top-1/3 left-1/4 w-[34rem] h-[34rem] bg-[#A16207]/[0.025] rounded-full blur-[170px] pointer-events-none" />
+      <div className="absolute bottom-10 right-1/4 w-[28rem] h-[28rem] bg-[#D97706]/[0.02] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
         
@@ -91,20 +91,20 @@ export const SkillsSection: React.FC = () => {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex items-center space-x-4 mb-7"
+          className="flex items-center space-x-4 mb-5"
         >
           <span
-            className="text-[11px] font-medium tracking-[0.35em] uppercase text-[#D4AF37]"
+            className="text-[11px] font-semibold tracking-[0.35em] uppercase text-[#A16207]"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             03 / TECH MATRIX
           </span>
-          <div className="w-20 h-[1px] bg-gradient-to-r from-[#D4AF37]/80 via-[#8C6D4F]/40 to-transparent" />
+          <div className="w-20 h-[1.5px] bg-gradient-to-r from-[#A16207]/80 via-[#D0C7BC]/40 to-transparent" />
         </motion.div>
 
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -114,16 +114,16 @@ export const SkillsSection: React.FC = () => {
             className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] tracking-tight uppercase leading-[0.85] select-none"
             style={{ fontFamily: "'Bebas Neue', sans-serif" }}
           >
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-[#FFFFFF] via-[#D5CBC0] to-[#605448] drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+            <span className="block text-[#141312] drop-shadow-[0_1px_2px_rgba(20,18,16,0.06)]">
               ARCHITECTURAL MASTERY.
             </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-[#F7E7C4] via-[#C99E5D] to-[#543B1A] drop-shadow-[0_8px_25px_rgba(201,158,93,0.35)]">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#92400E] via-[#B45309] to-[#A16207] drop-shadow-[0_2px_12px_rgba(180,83,9,0.15)]">
               PRECISION APPLIED.
             </span>
           </h2>
         </motion.div>
 
-        {/* Refined 6-Category Grid */}
+        {/* Refined 6-Category Grid: Responsive (1 col small, 2 col med, 3 col large) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -138,29 +138,29 @@ export const SkillsSection: React.FC = () => {
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               whileHover={{ y: -5, transition: { duration: 0.25 } }}
-              className="relative p-7 sm:p-8 rounded-sm border border-[#8C6D4F]/35 bg-[#100D0B]/85 backdrop-blur-xl overflow-hidden transition-all duration-500 hover:border-[#D4AF37]/80 hover:shadow-[0_16px_45px_rgba(212,175,55,0.14)] cursor-pointer group flex flex-col justify-between"
+              className="relative p-6 sm:p-8 rounded-sm border border-[#E2DDD5] bg-white shadow-[0_6px_24px_rgba(24,22,20,0.04)] hover:shadow-[0_16px_40px_rgba(24,22,20,0.08)] hover:border-[#A16207] transition-all duration-500 cursor-pointer group flex flex-col justify-between"
             >
               <div>
                 {/* Top Subtle Border Highlight */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#A16207]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Corner Minimal Pins */}
-                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#D4AF37]/40 group-hover:border-[#D4AF37] transition-colors duration-300" />
-                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#D4AF37]/40 group-hover:border-[#D4AF37] transition-colors duration-300" />
+                <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-[#A16207]/40 group-hover:border-[#A16207] transition-colors duration-300" />
+                <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#A16207]/40 group-hover:border-[#A16207] transition-colors duration-300" />
 
                 {/* Card Meta Header */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#D4AF37] group-hover:text-[#F3DBB3] transition-colors">
+                  <span className="text-[10px] font-mono font-bold tracking-[0.25em] uppercase text-[#A16207]">
                     {block.badge}
                   </span>
-                  <span className="text-[9.5px] font-mono px-2 py-0.5 border border-[#8C6D4F]/40 text-[#C4B5A5] bg-[#17130F] group-hover:border-[#D4AF37]/50 group-hover:text-white transition-all">
+                  <span className="text-[9.5px] font-mono px-2 py-0.5 border border-[#E2DDD5] text-[#5A534B] bg-[#FAF9F6] rounded-xs font-medium group-hover:border-[#A16207]/40 transition-colors">
                     {block.stat}
                   </span>
                 </div>
 
                 {/* Title */}
                 <h3
-                  className="text-2xl sm:text-3xl font-normal tracking-wide text-white mb-2.5 group-hover:text-[#F7E7C4] transition-colors uppercase leading-none"
+                  className="text-2xl sm:text-3xl font-normal tracking-wide text-[#141312] mb-2.5 group-hover:text-[#A16207] transition-colors uppercase leading-none"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
                   {block.title}
@@ -168,7 +168,7 @@ export const SkillsSection: React.FC = () => {
 
                 {/* Description */}
                 <p
-                  className="text-xs text-[#A8988B] font-light leading-relaxed mb-6 group-hover:text-[#D5CBC0] transition-colors"
+                  className="text-xs text-[#45413C] font-normal leading-relaxed mb-6"
                   style={{ fontFamily: "'Montserrat', sans-serif" }}
                 >
                   {block.description}
@@ -176,11 +176,11 @@ export const SkillsSection: React.FC = () => {
               </div>
 
               {/* Interactive Tag Chips */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-[#8C6D4F]/20">
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-[#ECE7E0]">
                 {block.items.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] uppercase rounded-sm border border-[#8C6D4F]/35 bg-[#171310] text-[#E8D7C5] group-hover:border-[#D4AF37]/50 group-hover:bg-[#1F1914] group-hover:text-white transition-all duration-300"
+                    className="px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] uppercase rounded-sm border border-[#E2DDD5] bg-[#FAF9F6] text-[#332F2A] group-hover:border-[#A16207]/40 group-hover:bg-[#FEF3C7] group-hover:text-[#92400E] transition-all duration-300"
                     style={{ fontFamily: "'Montserrat', sans-serif" }}
                   >
                     {tech}

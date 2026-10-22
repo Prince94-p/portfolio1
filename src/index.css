@@ -1,9 +1,73 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+:root {
+  --bg-main: #F8F7F4;
+  --bg-secondary: #EFECE6;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FAF9F6;
+  --text-primary: #141312;
+  --text-secondary: #45413C;
+  --text-muted: #756E65;
+  --border-default: #E2DDD5;
+  --border-subtle: #ECE7E0;
+  --accent-primary: #A16207;
+  --accent-hover: #78350F;
+  --accent-soft: #FEF3C7;
+  --btn-primary-bg: #181614;
+  --btn-primary-text: #FFFFFF;
+  --success: #15803D;
+  --error: #B91C1C;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: #000;
+  background-color: #F8F7F4;
+  color: #141312;
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html, body {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth selection colors */
+::selection {
+  background-color: #EAD8C7;
+  color: #181614;
+}
+
+/* Autofill override for light theme inputs */
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
+  -webkit-text-fill-color: #141312 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F7F4;
+}
+::-webkit-scrollbar-thumb {
+  background: #D5CEC4;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A16207;
 }

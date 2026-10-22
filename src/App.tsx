@@ -15,7 +15,7 @@ function App() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-black text-[#E8DFD8] selection:bg-[#cbb59d] selection:text-black">
+    <div className="w-full min-h-screen bg-[#F8F7F4] text-[#141312] selection:bg-[#EAD8C7] selection:text-[#181614]">
       <BootLoader onBootComplete={handleBootComplete} />
       <HeroSection isBooted={isBooted} />
       <AboutSection />

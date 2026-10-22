@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import heroPrinceImg from '../assets/hero-prince.png';
+import heroImg from '../assets/img.png';
 import watermarkImg from '../assets/watermark.png';
 import aboutImg from '../assets/about.png';
 
@@ -15,7 +15,7 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
   const [phase, setPhase] = useState<'booting' | 'ready' | 'exit' | 'done'>(() => {
     return hasBootedGlobally ? 'done' : 'booting';
   });
-  const [statusText, setStatusText] = useState('BOOTING PORTFOLIO');
+  const [statusText, setStatusText] = useState('INITIALIZING ARCHITECTURE');
   const [progress, setProgress] = useState(0);
 
   // Store callback in a ref to prevent effect re-runs if callback identity changes
@@ -61,16 +61,16 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
         }
       });
 
-    preloadImage(heroPrinceImg);
+    preloadImage(heroImg);
     preloadImage(watermarkImg);
     preloadImage(aboutImg);
     if (document.fonts) {
       document.fonts.ready.catch(() => {});
     }
 
-    // Total target duration: ~5.0 seconds total (4.2s progress + 0.5s SYSTEM READY + 0.7s exit reveal)
-    const PROGRESS_DURATION = 4200;
-    const READY_PAUSE = 500;
+    // Total target duration: ~3.6s (2.8s progress + 0.35s SYSTEM READY + 0.45s exit reveal)
+    const PROGRESS_DURATION = 2800;
+    const READY_PAUSE = 350;
     const startTime = performance.now();
 
     const updateProgress = (now: number) => {
@@ -98,7 +98,7 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
           // Transition to done after curtain exit animation ends
           doneTimeoutRef.current = setTimeout(() => {
             setPhase('done');
-          }, 750);
+          }, 600);
         }, READY_PAUSE);
       }
     };
@@ -120,7 +120,7 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
     };
   }, []);
 
-  if (phase === 'done' || hasBootedGlobally && phase !== 'exit') {
+  if (phase === 'done' || (hasBootedGlobally && phase !== 'exit')) {
     return null;
   }
 
@@ -131,37 +131,37 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
       aria-hidden="true"
       className="fixed inset-0 z-[99999] pointer-events-none flex items-center justify-center select-none overflow-hidden"
     >
-      {/* Top Curtain Panel */}
+      {/* Top Curtain Panel - Architectural Alabaster */}
       <motion.div
         initial={{ y: '0%' }}
         animate={{ y: isExiting ? '-100%' : '0%' }}
         transition={{
-          duration: 0.75,
+          duration: 0.6,
           ease: [0.76, 0, 0.24, 1],
         }}
-        className="absolute top-0 left-0 w-full h-1/2 bg-black border-b border-[#D4AF37]/20"
+        className="absolute top-0 left-0 w-full h-1/2 bg-[#F8F7F4] border-b border-[#E2DDD5]"
       />
 
-      {/* Bottom Curtain Panel */}
+      {/* Bottom Curtain Panel - Architectural Alabaster */}
       <motion.div
         initial={{ y: '0%' }}
         animate={{ y: isExiting ? '100%' : '0%' }}
         transition={{
-          duration: 0.75,
+          duration: 0.6,
           ease: [0.76, 0, 0.24, 1],
         }}
-        className="absolute bottom-0 left-0 w-full h-1/2 bg-black border-t border-[#D4AF37]/20"
+        className="absolute bottom-0 left-0 w-full h-1/2 bg-[#F8F7F4] border-t border-[#E2DDD5]"
       />
 
-      {/* Center Seam Glow Line */}
+      {/* Center Seam Hairline Accent */}
       <motion.div
-        initial={{ opacity: 0.8, scaleX: 1 }}
+        initial={{ opacity: 0.7, scaleX: 1 }}
         animate={{
-          opacity: isExiting ? 0 : 0.8,
-          scaleX: isExiting ? 1.5 : 1,
+          opacity: isExiting ? 0 : 0.7,
+          scaleX: isExiting ? 1.4 : 1,
         }}
         transition={{ duration: 0.35 }}
-        className="absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 bg-gradient-to-r from-transparent via-[#D4AF37]/60 to-transparent pointer-events-none"
+        className="absolute top-1/2 left-0 w-full h-[1px] -translate-y-1/2 bg-gradient-to-r from-transparent via-[#A16207]/40 to-transparent pointer-events-none"
       />
 
       {/* Central Content Container */}
@@ -176,20 +176,20 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
               y: -14,
               scale: 0.96,
               filter: 'blur(4px)',
-              transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+              transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
             }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className="relative z-10 flex flex-col items-center justify-center pointer-events-auto"
           >
-            {/* Ambient Gold Radial Glow */}
-            <div className="absolute w-44 h-44 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
+            {/* Ambient Bronze Radial Tint */}
+            <div className="absolute w-48 h-48 bg-[#A16207]/[0.06] rounded-full blur-2xl pointer-events-none" />
 
             {/* Spinner Container */}
             <div className="relative w-11 h-11 mb-6 flex items-center justify-center">
-              {/* Inactive Dark Track Ring */}
-              <div className="absolute inset-0 rounded-full border-[1.5px] border-[#332A20]/80" />
+              {/* Inactive Track Ring */}
+              <div className="absolute inset-0 rounded-full border-[1.5px] border-[#E2DDD5]" />
 
-              {/* Active Gold Spinner Ring */}
+              {/* Active Bronze Spinner Ring */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{
@@ -197,43 +197,41 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
                   duration: 1.1,
                   ease: 'linear',
                 }}
-                className="absolute inset-0 rounded-full border-[1.5px] border-transparent border-t-[#D4AF37] border-r-[#F7E7C4]/80 shadow-[0_0_12px_rgba(212,175,55,0.35)]"
+                className="absolute inset-0 rounded-full border-[1.5px] border-transparent border-t-[#A16207] border-r-[#D97706] shadow-[0_0_10px_rgba(161,98,7,0.25)]"
               />
 
               {/* Core Micro Indicator */}
               <motion.div
                 animate={{
-                  scale: phase === 'ready' ? [1, 1.4, 1] : [0.85, 1.15, 0.85],
-                  opacity: phase === 'ready' ? 1 : [0.5, 1, 0.5],
+                  scale: phase === 'ready' ? [1, 1.3, 1] : [0.85, 1.15, 0.85],
+                  opacity: phase === 'ready' ? 1 : [0.6, 1, 0.6],
                 }}
                 transition={{
                   repeat: phase === 'ready' ? 1 : Infinity,
                   duration: phase === 'ready' ? 0.3 : 1.4,
                   ease: 'easeInOut',
                 }}
-                className="w-1.5 h-1.5 rounded-full bg-[#EAD8C7] shadow-[0_0_6px_rgba(234,216,199,0.8)]"
+                className="w-1.5 h-1.5 rounded-full bg-[#141312] shadow-[0_0_4px_rgba(20,18,16,0.3)]"
               />
             </div>
 
             {/* Boot Status Text & Percent */}
             <div className="flex flex-col items-center space-y-1.5 text-center">
               <div className="flex items-center space-x-2">
-                <span
-                  className="text-[11px] sm:text-[12px] font-mono tracking-[0.24em] uppercase text-[#EAD8C7] font-medium"
-                >
+                <span className="text-[11px] sm:text-[12px] font-mono tracking-[0.24em] uppercase text-[#141312] font-semibold">
                   {statusText}
                 </span>
                 {phase === 'booting' && (
                   <motion.span
                     animate={{ opacity: [0, 1, 0] }}
                     transition={{ repeat: Infinity, duration: 0.8 }}
-                    className="inline-block w-1.5 h-3 bg-[#D4AF37]"
+                    className="inline-block w-1.5 h-3 bg-[#A16207]"
                   />
                 )}
               </div>
 
               {/* Subtle Tech Progress Counter */}
-              <div className="text-[9px] font-mono tracking-[0.2em] text-[#8C6D4F] uppercase">
+              <div className="text-[9px] font-mono tracking-[0.2em] text-[#756E65] uppercase">
                 {phase === 'ready' ? 'INIT_OK // 100%' : `INITIALIZING // ${progress}%`}
               </div>
             </div>
