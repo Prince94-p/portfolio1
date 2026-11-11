@@ -86,21 +86,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
     isUpdatingRef.current = true;
 
-    // On mobile screens (<768px), allow natural normal scroll flow so all cards & buttons are 100% fully visible
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    if (isMobile) {
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
-        card.style.transform = 'none';
-        card.style.filter = 'none';
-        card.style.marginBottom = i < cardsRef.current.length - 1 ? '24px' : '0px';
-      });
-      isUpdatingRef.current = false;
-      return;
-    }
-
     const { scrollTop, containerHeight } = getScrollData();
-    const stackPositionPx = parsePercentage(stackPosition, containerHeight);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    // Responsive stack positioning: on mobile, stack closer to top (20px) to maximize card visibility
+    const defaultStackPositionPx = parsePercentage(stackPosition, containerHeight);
+    const mobileStackPositionPx = Math.min(20, containerHeight * 0.04);
+    const stackPositionPx = isMobile ? mobileStackPositionPx : defaultStackPositionPx;
+
+    const effectiveItemStackDistance = isMobile ? 12 : itemStackDistance;
     const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
 
     const endElement = useWindowScroll
@@ -114,10 +108,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
 
+      const cardHeight = card.offsetHeight || 500;
+      // Viewport safety check: ensure the bottom of the card never overflows past the screen bottom
+      const maxSafeStackTop = Math.max(8, containerHeight - cardHeight - 16);
+      const cardStackTop = isMobile ? Math.min(stackPositionPx, maxSafeStackTop) : stackPositionPx;
+
       const cardTop = initialTopsRef.current[i] || 0;
-      const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
+      const triggerStart = cardTop - cardStackTop - effectiveItemStackDistance * i;
       const triggerEnd = cardTop - scaleEndPositionPx;
-      const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
+      const pinStart = cardTop - cardStackTop - effectiveItemStackDistance * i;
       const pinEnd = endElementTop - containerHeight / 2;
 
       const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
@@ -130,7 +129,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         let topCardIndex = 0;
         for (let j = 0; j < cardsRef.current.length; j++) {
           const jCardTop = initialTopsRef.current[j] || 0;
-          const jTriggerStart = jCardTop - stackPositionPx - itemStackDistance * j;
+          const jTriggerStart = jCardTop - cardStackTop - effectiveItemStackDistance * j;
           if (scrollTop >= jTriggerStart) {
             topCardIndex = j;
           }
@@ -146,9 +145,9 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       const isPinned = scrollTop >= pinStart && scrollTop <= pinEnd;
 
       if (isPinned) {
-        translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i;
+        translateY = scrollTop - cardTop + cardStackTop + effectiveItemStackDistance * i;
       } else if (scrollTop > pinEnd) {
-        translateY = pinEnd - cardTop + stackPositionPx + itemStackDistance * i;
+        translateY = pinEnd - cardTop + cardStackTop + effectiveItemStackDistance * i;
       }
 
       const newTransform = {
@@ -242,16 +241,6 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         card.style.transform = 'none';
       });
 
-      if (typeof window !== 'undefined' && window.innerWidth < 768) {
-        cards.forEach((card, i) => {
-          card.style.transform = 'none';
-          card.style.filter = 'none';
-          card.style.zIndex = 'auto';
-          card.style.marginBottom = i < cards.length - 1 ? '24px' : '0px';
-        });
-        return;
-      }
-
       initialTopsRef.current = cards.map((card) => {
         const rect = card.getBoundingClientRect();
         return rect.top + window.scrollY;
@@ -259,10 +248,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
       lastTransformsRef.current.clear();
 
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      const margin = isMobile ? 32 : itemDistance;
+
       cards.forEach((card, i) => {
         card.style.zIndex = `${i + 1}`;
         if (i < cards.length - 1) {
-          card.style.marginBottom = `${itemDistance}px`;
+          card.style.marginBottom = `${margin}px`;
         }
         card.style.willChange = 'transform, filter';
         card.style.transformOrigin = 'top center';

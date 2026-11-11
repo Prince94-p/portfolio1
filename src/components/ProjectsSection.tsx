@@ -282,7 +282,7 @@ export const ProjectsSection: React.FC = () => {
         >
           {featuredProjects.map((project) => (
             <ScrollStackItem key={project.title}>
-              <div className="relative w-full rounded-2xl border border-[#E2DDD5] bg-white p-5 sm:p-8 lg:p-12 shadow-[0_16px_40px_rgba(24,22,20,0.06)] group overflow-hidden transition-all duration-500 hover:border-[#A16207]">
+              <div className="relative w-full rounded-2xl border border-[#E2DDD5] bg-white p-5 sm:p-8 lg:p-12 shadow-[0_16px_40px_rgba(24,22,20,0.06)] group overflow-hidden max-h-[88vh] overflow-y-auto sm:max-h-none sm:overflow-visible transition-all duration-500 hover:border-[#A16207]">
                 
                 {/* Top Subtle Amber Border Flare */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#A16207]/50 to-transparent" />
