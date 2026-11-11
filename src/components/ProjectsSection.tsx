@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollStack, { ScrollStackItem } from './ScrollStack';
+import { SectionDivider } from './SectionDivider';
 
 interface FeaturedProject {
   number: string;
@@ -410,8 +411,11 @@ export const ProjectsSection: React.FC = () => {
           ))}
         </ScrollStack>
 
+        {/* Animated Bronze Divider between Featured Work & Archive */}
+        <SectionDivider className="my-14 sm:my-20 px-0" />
+
         {/* ================= MORE PROJECTS (COMPACT GRID) ================= */}
-        <div className="mt-20 sm:mt-28">
+        <div>
           {/* Eyebrow Header */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
