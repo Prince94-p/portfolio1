@@ -87,14 +87,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isBooted = true }) => 
         <img
           src={heroImg}
           alt="Prince Patel"
-          className="absolute inset-0 w-full h-full object-cover object-[72%_center] sm:object-[75%_center] lg:object-[80%_center] select-none pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-[54%_center] sm:object-[72%_center] lg:object-[80%_center] opacity-80 sm:opacity-90 lg:opacity-100 select-none pointer-events-none"
         />
 
-        {/* Soft Architectural Left Blend for Text Contrast */}
-        <div className="absolute inset-y-0 left-0 w-full md:w-3/5 bg-gradient-to-r from-[#F8F7F4] via-[#F8F7F4]/90 sm:via-[#F8F7F4]/80 to-transparent pointer-events-none" />
+        {/* Responsive Text Contrast Scrim (Vertical on Mobile, Left Horizontal on Desktop) */}
+        <div className="absolute inset-0 md:inset-y-0 md:left-0 md:w-3/5 bg-gradient-to-b from-[#F8F7F4]/85 via-[#F8F7F4]/35 to-[#F8F7F4]/85 md:bg-gradient-to-r md:from-[#F8F7F4] md:via-[#F8F7F4]/90 md:to-transparent pointer-events-none" />
         
         {/* Subtle Bottom Grounding Blend into Next Section */}
-        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#F8F7F4] via-[#F8F7F4]/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-20 sm:h-28 bg-gradient-to-t from-[#F8F7F4] via-[#F8F7F4]/70 to-transparent pointer-events-none" />
       </div>
 
       {/* ================= 4. CONTENT LAYER ================= */}

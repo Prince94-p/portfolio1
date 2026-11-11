@@ -86,6 +86,19 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
     isUpdatingRef.current = true;
 
+    // On mobile screens (<768px), allow natural normal scroll flow so all cards & buttons are 100% fully visible
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    if (isMobile) {
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+        card.style.transform = 'none';
+        card.style.filter = 'none';
+        card.style.marginBottom = i < cardsRef.current.length - 1 ? '24px' : '0px';
+      });
+      isUpdatingRef.current = false;
+      return;
+    }
+
     const { scrollTop, containerHeight } = getScrollData();
     const stackPositionPx = parsePercentage(stackPosition, containerHeight);
     const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
@@ -228,6 +241,16 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       cards.forEach((card) => {
         card.style.transform = 'none';
       });
+
+      if (typeof window !== 'undefined' && window.innerWidth < 768) {
+        cards.forEach((card, i) => {
+          card.style.transform = 'none';
+          card.style.filter = 'none';
+          card.style.zIndex = 'auto';
+          card.style.marginBottom = i < cards.length - 1 ? '24px' : '0px';
+        });
+        return;
+      }
 
       initialTopsRef.current = cards.map((card) => {
         const rect = card.getBoundingClientRect();

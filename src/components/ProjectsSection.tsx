@@ -172,9 +172,9 @@ const secondaryProjects: SecondaryProject[] = [
 ];
 
 const CertFlowStudioVisual: React.FC = () => (
-  <div className="relative w-full rounded-md border border-[#E2DDD5] bg-[#FAF9F6] p-3.5 mb-4 overflow-hidden shadow-xs">
+  <div className="relative w-full rounded-md border border-[#E2DDD5] bg-[#FAF9F6] p-3 sm:p-3.5 mb-3.5 sm:mb-4 overflow-hidden shadow-xs">
     {/* Studio Header Bar */}
-    <div className="flex items-center justify-between pb-2 mb-2.5 border-b border-[#ECE7E0]">
+    <div className="flex items-center justify-between pb-1.5 sm:pb-2 mb-2 sm:mb-2.5 border-b border-[#ECE7E0]">
       <div className="flex items-center space-x-1.5">
         <span className="w-2 h-2 rounded-full bg-[#D5CEC4]" />
         <span className="w-2 h-2 rounded-full bg-[#D5CEC4]" />
@@ -188,25 +188,25 @@ const CertFlowStudioVisual: React.FC = () => (
     </div>
 
     {/* Certificate Mockup Canvas */}
-    <div className="relative rounded-sm border border-[#D0C7BC]/70 bg-white p-3.5 shadow-inner flex flex-col items-center justify-center text-center">
+    <div className="relative rounded-sm border border-[#D0C7BC]/70 bg-white p-2.5 sm:p-3.5 shadow-inner flex flex-col items-center justify-center text-center">
       {/* Ornamental Frame Border */}
       <div className="absolute inset-1 border border-[#A16207]/20 pointer-events-none rounded-xs" />
       
-      <span className="text-[8px] font-mono tracking-[0.25em] uppercase text-[#A16207] font-semibold mb-1.5">
+      <span className="text-[7.5px] sm:text-[8px] font-mono tracking-[0.25em] uppercase text-[#A16207] font-semibold mb-1">
         CERTIFICATE OF ACHIEVEMENT
       </span>
-      <div className="my-1 px-3 py-1.5 rounded-xs border border-dashed border-[#A16207]/60 bg-[#FEF3C7]/40">
-        <span className="text-[10.5px] font-mono font-bold text-[#141312] tracking-wide">
+      <div className="my-1 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xs border border-dashed border-[#A16207]/60 bg-[#FEF3C7]/40">
+        <span className="text-[9.5px] sm:text-[10.5px] font-mono font-bold text-[#141312] tracking-wide">
           [ RECIPIENT FULL NAME ]
         </span>
       </div>
-      <span className="text-[7.5px] font-mono text-[#756E65] mt-1">
+      <span className="text-[7px] sm:text-[7.5px] font-mono text-[#756E65] mt-0.5 sm:mt-1">
         DYNAMIC COORDINATE MAPPING • AUTO BATCH RENDER
       </span>
     </div>
 
     {/* Pipeline Telemetry Strip */}
-    <div className="mt-2.5 pt-2 border-t border-[#ECE7E0] flex items-center justify-between text-[9px] font-mono text-[#5A534B]">
+    <div className="mt-2 sm:mt-2.5 pt-1.5 sm:pt-2 border-t border-[#ECE7E0] flex items-center justify-between text-[8.5px] sm:text-[9px] font-mono text-[#5A534B]">
       <span>PIPELINE: CSV / XLSX → RENDER</span>
       <span className="text-[#A16207] font-semibold">100% DISPATCHED</span>
     </div>
@@ -282,7 +282,7 @@ export const ProjectsSection: React.FC = () => {
         >
           {featuredProjects.map((project) => (
             <ScrollStackItem key={project.title}>
-              <div className="relative w-full rounded-2xl border border-[#E2DDD5] bg-white p-6 sm:p-10 lg:p-12 shadow-[0_16px_40px_rgba(24,22,20,0.06)] group overflow-hidden transition-all duration-500 hover:border-[#A16207]">
+              <div className="relative w-full rounded-2xl border border-[#E2DDD5] bg-white p-5 sm:p-8 lg:p-12 shadow-[0_16px_40px_rgba(24,22,20,0.06)] group overflow-hidden transition-all duration-500 hover:border-[#A16207]">
                 
                 {/* Top Subtle Amber Border Flare */}
                 <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#A16207]/50 to-transparent" />
@@ -346,36 +346,36 @@ export const ProjectsSection: React.FC = () => {
                   </div>
 
                   {/* Right Column (5 Cols) */}
-                  <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-5 lg:pl-6 lg:border-l lg:border-[#ECE7E0]">
+                  <div className="lg:col-span-5 flex flex-col justify-between h-full space-y-4 sm:space-y-5 lg:pl-6 lg:border-l lg:border-[#ECE7E0]">
                     {/* Visual Product Thumbnail for CertFlow */}
                     {project.isSaaS && <CertFlowStudioVisual />}
 
-                    <div className="space-y-2.5">
-                      <span className="text-[9.5px] font-mono font-semibold tracking-[0.25em] uppercase text-[#756E65] block mb-2">
+                    <div className="space-y-2 sm:space-y-2.5">
+                      <span className="text-[9.5px] font-mono font-semibold tracking-[0.25em] uppercase text-[#756E65] block mb-1.5 sm:mb-2">
                         // ARCHITECTURE METRICS
                       </span>
                       {project.metrics.map((m) => (
                         <div
                           key={m.label}
-                          className="p-3.5 rounded-sm border border-[#EAE5DC] bg-[#FAF9F6] flex items-center justify-between"
+                          className="p-2.5 sm:p-3.5 rounded-sm border border-[#EAE5DC] bg-[#FAF9F6] flex items-center justify-between"
                         >
-                          <span className="text-[10px] font-mono font-medium text-[#756E65]">
+                          <span className="text-[9.5px] sm:text-[10px] font-mono font-medium text-[#756E65]">
                             {m.label}
                           </span>
-                          <span className="text-[11px] font-mono font-bold text-[#141312]">
+                          <span className="text-[10px] sm:text-[11px] font-mono font-bold text-[#141312]">
                             {m.value}
                           </span>
                         </div>
                       ))}
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                    <div className="flex flex-row gap-2.5 sm:gap-3 pt-2">
                       {project.demoUrl && (
                         <a
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-sm bg-[#A16207] hover:bg-[#78350F] text-white text-[10.5px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-[0_2px_10px_rgba(161,98,7,0.2)]"
+                          className="flex-1 inline-flex items-center justify-center space-x-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-sm bg-[#A16207] hover:bg-[#78350F] text-white text-[10px] sm:text-[10.5px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 shadow-[0_2px_10px_rgba(161,98,7,0.2)]"
                           style={{ fontFamily: "'Montserrat', sans-serif" }}
                         >
                           <span>LIVE DEMO</span>
@@ -388,7 +388,7 @@ export const ProjectsSection: React.FC = () => {
                           href={project.githubUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-1 inline-flex items-center justify-center space-x-2 px-5 py-3 rounded-sm border border-[#D0C7BC] bg-white hover:bg-[#F4F1EA] hover:border-[#A16207] text-[#181614] text-[10.5px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-xs"
+                          className="flex-1 inline-flex items-center justify-center space-x-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-sm border border-[#D0C7BC] bg-white hover:bg-[#F4F1EA] hover:border-[#A16207] text-[#181614] text-[10px] sm:text-[10.5px] font-semibold tracking-[0.18em] uppercase transition-all duration-300 shadow-xs"
                           style={{ fontFamily: "'Montserrat', sans-serif" }}
                         >
                           <span>VIEW GITHUB</span>
@@ -396,7 +396,7 @@ export const ProjectsSection: React.FC = () => {
                         </a>
                       ) : (
                         <div
-                          className="flex-1 inline-flex items-center justify-center space-x-1.5 px-4 py-3 rounded-sm border border-[#E2DDD5] bg-[#FAF9F6] text-[#756E65] text-[10px] font-mono tracking-wider uppercase select-none"
+                          className="flex-1 inline-flex items-center justify-center space-x-1.5 px-3 sm:px-4 py-2.5 sm:py-3 rounded-sm border border-[#E2DDD5] bg-[#FAF9F6] text-[#756E65] text-[9.5px] sm:text-[10px] font-mono tracking-wider uppercase select-none"
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-[#15803D] inline-block animate-pulse" />
                           <span>PRODUCTION SAAS</span>
