@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
-import watermarkImg from '../assets/watermark.png';
 import heroImg from '../assets/img.png';
 import { PersonalSignature } from './PersonalSignature';
 
@@ -96,33 +95,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isBooted = true }) => 
         
         {/* Subtle Bottom Grounding Blend into Next Section */}
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#F8F7F4] via-[#F8F7F4]/70 to-transparent pointer-events-none" />
-
-        {/* ================= 3. ANIMATED WATERMARK EMBLEM (CURATED SEAL) ================= */}
-        <div className="absolute bottom-6 right-6 lg:bottom-10 lg:right-12 pointer-events-none flex items-center justify-center z-10">
-          <div className="relative flex items-center justify-center">
-            {/* Soft architectural diffused glow behind seal */}
-            <div className="absolute w-32 h-32 bg-[#A16207]/[0.08] rounded-full blur-xl" />
-
-            <motion.div
-              animate={{
-                y: [-2, 2, -2],
-                scale: [1, 1.02, 1],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="relative flex items-center justify-center p-2 rounded-full bg-white/70 backdrop-blur-md border border-[#E2DDD5]/80 shadow-[0_8px_25px_rgba(24,22,20,0.06)]"
-            >
-              <img
-                src={watermarkImg}
-                alt="Insignia"
-                className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-contain opacity-90 drop-shadow-[0_2px_10px_rgba(161,98,7,0.2)]"
-              />
-            </motion.div>
-          </div>
-        </div>
       </div>
 
       {/* ================= 4. CONTENT LAYER ================= */}
@@ -246,7 +218,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isBooted = true }) => 
             {/* Massive Condensed Headline */}
             <motion.div variants={fadeUpVariants} className="relative mb-3.5 select-none">
               <h1
-                className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] xl:text-[7.8rem] tracking-tight uppercase leading-[0.83]"
+                className="text-[2.75rem] xs:text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] xl:text-[7.8rem] tracking-tight uppercase leading-[0.83]"
                 style={{ fontFamily: "'Bebas Neue', sans-serif" }}
               >
                 {/* Line 1: I BUILD */}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import heroImg from '../assets/img.png';
-import watermarkImg from '../assets/watermark.png';
 import aboutImg from '../assets/about.png';
 
 interface BootLoaderProps {
@@ -62,7 +61,6 @@ export const BootLoader: React.FC<BootLoaderProps> = ({ onBootComplete }) => {
       });
 
     preloadImage(heroImg);
-    preloadImage(watermarkImg);
     preloadImage(aboutImg);
     if (document.fonts) {
       document.fonts.ready.catch(() => {});

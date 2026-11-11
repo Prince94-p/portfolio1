@@ -188,7 +188,7 @@ export const AboutSection: React.FC = () => {
                   className="text-3xl sm:text-4xl font-normal text-[#A16207] tracking-tight"
                   style={{ fontFamily: "'Bebas Neue', sans-serif" }}
                 >
-                  4+
+                  5+
                 </span>
                 <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-[#756E65] mt-0.5">
                   Key Projects Built

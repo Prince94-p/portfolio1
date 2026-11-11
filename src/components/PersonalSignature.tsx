@@ -18,25 +18,25 @@ export const PersonalSignature: React.FC<PersonalSignatureProps> = ({
     >
       {/* Signature Name Row */}
       <div className="flex items-baseline space-x-1.5 leading-none">
-        {/* "Prince" - Distinctive Elegant Signature Lettering in Warm Editorial Bronze */}
+        {/* "Prince" - Distinctive Signature Lettering in Deep Obsidian */}
         <span
           className={`${
             isHero
-              ? 'text-[1.7rem] sm:text-[1.85rem] tracking-[0.015em]'
-              : 'text-[1.1rem] sm:text-[1.22rem] tracking-[0.015em]'
-          } font-normal italic text-transparent bg-clip-text bg-gradient-to-r from-[#78350F] via-[#A16207] to-[#B45309] drop-shadow-[0_1px_4px_rgba(161,98,7,0.15)] transition-all duration-300`}
+              ? 'text-[1.8rem] sm:text-[1.95rem] tracking-[0.02em]'
+              : 'text-[1.15rem] sm:text-[1.25rem] tracking-[0.02em]'
+          } font-semibold italic text-[#141312] transition-colors duration-300 drop-shadow-[0_1px_1px_rgba(20,18,16,0.08)]`}
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           Prince
         </span>
 
-        {/* "A. Patel" - Refined Editorial Balance in Deep Charcoal */}
+        {/* "A. Patel" - Refined Editorial Balance in Deep Warm Charcoal */}
         <span
           className={`${
             isHero
-              ? 'text-[1.3rem] sm:text-[1.42rem] tracking-[0.05em]'
-              : 'text-[0.88rem] sm:text-[0.96rem] tracking-[0.05em]'
-          } font-light text-[#141312] transition-all duration-300`}
+              ? 'text-[1.38rem] sm:text-[1.48rem] tracking-[0.04em]'
+              : 'text-[0.92rem] sm:text-[0.98rem] tracking-[0.04em]'
+          } font-medium text-[#1E1B18] transition-colors duration-300`}
           style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
         >
           A. Patel
@@ -46,7 +46,7 @@ export const PersonalSignature: React.FC<PersonalSignatureProps> = ({
       {/* Signature Underline Stroke */}
       <svg
         className={`${
-          isHero ? 'w-full max-w-[158px] h-[7px] mt-0.5' : 'w-full max-w-[112px] h-[5px] mt-0.5'
+          isHero ? 'w-full max-w-[165px] h-[7px] mt-1' : 'w-full max-w-[115px] h-[5px] mt-0.5'
         } overflow-visible text-[#A16207]`}
         viewBox="0 0 160 8"
         fill="none"
@@ -55,15 +55,15 @@ export const PersonalSignature: React.FC<PersonalSignatureProps> = ({
         <path
           d="M 2 4 Q 50 1.8, 95 4 T 155 3.5"
           stroke="url(#sig-grad)"
-          strokeWidth={isHero ? '1.2' : '0.9'}
+          strokeWidth={isHero ? '1.3' : '1.0'}
           strokeLinecap="round"
         />
-        <circle cx="157" cy="3.5" r={isHero ? '1' : '0.8'} fill="#A16207" />
+        <circle cx="157" cy="3.5" r={isHero ? '1.2' : '0.9'} fill="#A16207" />
         <defs>
           <linearGradient id="sig-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#A16207" stopOpacity="0.9" />
-            <stop offset="55%" stopColor="#D97706" stopOpacity="1" />
-            <stop offset="100%" stopColor="#A16207" stopOpacity="0.4" />
+            <stop offset="0%" stopColor="#A16207" stopOpacity="0.95" />
+            <stop offset="60%" stopColor="#D97706" stopOpacity="1" />
+            <stop offset="100%" stopColor="#A16207" stopOpacity="0.5" />
           </linearGradient>
         </defs>
       </svg>

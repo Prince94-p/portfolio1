@@ -1,0 +1,14 @@
+{
+  "name": "Prince Patel",
+  "short_name": "Prince Patel",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#141312",
+  "background_color": "#F8F7F4",
+  "display": "standalone"
+}

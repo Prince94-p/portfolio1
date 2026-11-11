@@ -27,14 +27,14 @@ const bentoCategories = [
   {
     title: 'AI TOOLS',
     badge: 'ACCELERATION',
-    items: ['ChatGPT', 'Claude', 'Gemini', 'Cursor', 'Perplexity'],
+    items: ['ChatGPT', 'Claude', 'Gemini', 'Cursor', 'Perplexity', 'Antigravity'],
     description: 'Advanced generative workflows, rapid architecture prototyping, and automated code review.',
     stat: 'STATE-OF-THE-ART',
   },
   {
     title: 'TOOLS & ECOSYSTEM',
     badge: 'WORKFLOW',
-    items: ['Git', 'GitHub', 'VS Code', 'Figma', 'Antigravity'],
+    items: ['Git', 'GitHub', 'VS Code', 'Figma'],
     description: 'Git-based source control, UI mockups, terminal toolchains, and developer workflow automation.',
     stat: 'VERSION CONTROL',
   },
@@ -46,6 +46,54 @@ const bentoCategories = [
     stat: 'CLOUD & REALTIME',
   },
 ];
+
+const renderSkillIcon = (tech: string) => {
+  switch (tech) {
+    case 'Antigravity':
+      return (
+        <svg
+          className="w-2.5 h-2.5 shrink-0 text-[#A16207]"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M12 2.5L21.5 19H2.5L12 2.5ZM12 7.8L6.8 17H17.2L12 7.8Z" />
+        </svg>
+      );
+    case 'ChatGPT':
+      return (
+        <svg className="w-2.5 h-2.5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M22.28 9.37a5.99 5.99 0 0 0-.52-4.93 6.08 6.08 0 0 0-6.19-2.91 6.01 6.01 0 0 0-4.66-2.13 6.07 6.07 0 0 0-5.78 4.2 6.02 6.02 0 0 0-4.04 2.92 6.06 6.06 0 0 0 .73 6.8 5.98 5.98 0 0 0 .52 4.93 6.08 6.08 0 0 0 6.19 2.91 6.02 6.02 0 0 0 4.66 2.13 6.07 6.07 0 0 0 5.78-4.2 6.02 6.02 0 0 0 4.04-2.92 6.06 6.06 0 0 0-.73-6.8zm-9.39 12.63a4.57 4.57 0 0 1-2.95-1.07l.15-.08 4.88-2.82a.78.78 0 0 0 .39-.68v-6.88l2.06 1.19v5.69a4.58 4.58 0 0 1-4.53 4.57zm-8.8-4.6a4.56 4.56 0 0 1-.58-3.1 4.52 4.52 0 0 1 1.63-2.7l.15.09 4.88 2.82a.77.77 0 0 0 .78 0l5.96-3.44v2.38l-4.93 2.85a4.58 4.58 0 0 1-7.89 1.1zM3.46 8.7a4.55 4.55 0 0 1 2.37-2.03l-.01.17v5.63a.77.77 0 0 0 .39.67l5.96 3.44-2.06 1.19-4.92-2.84a4.58 4.58 0 0 1-1.73-6.26zm14.15 4.08l-5.96-3.44 2.06-1.19 4.92 2.84a4.58 4.58 0 0 1 1.73 6.26 4.55 4.55 0 0 1-2.37 2.03v-5.83a.77.77 0 0 0-.38-.67zm2.33-3.66l-.15-.09-4.88-2.82a.77.77 0 0 0-.78 0L8.17 9.65V7.27l4.93-2.85a4.58 4.58 0 0 1 7.89 1.1 4.56 4.56 0 0 1 .58 3.1 4.52 4.52 0 0 1-1.63 2.7zm-8.8-5.12a4.57 4.57 0 0 1 2.95 1.07l-.15.08-4.88 2.82a.78.78 0 0 0-.39.68v6.88l-2.06-1.19V8.01a4.58 4.58 0 0 1 4.53-4.57zM12 13.5l-2.6-1.5 2.6-1.5 2.6 1.5-2.6 1.5z"/>
+        </svg>
+      );
+    case 'Claude':
+      return (
+        <svg className="w-2.5 h-2.5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M13.8 2.2L12 7.8 10.2 2.2H7.6l2.8 7.3L3.8 6.8v2.6l6.3 2.5-6.3 2.5v2.6l6.6-2.7-2.8 7.3h2.6L12 16l1.8 5.6h2.6l-2.8-7.3 6.6 2.7v-2.6l-6.3-2.5 6.3-2.5V6.8l-6.6 2.7 2.8-7.3h-2.6z"/>
+        </svg>
+      );
+    case 'Gemini':
+      return (
+        <svg className="w-2.5 h-2.5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C12 7.52 7.52 12 2 12c5.52 0 10 4.48 10 10 0-5.52 4.48-10 10-10-5.52 0-10-4.48-10-10z"/>
+        </svg>
+      );
+    case 'Cursor':
+      return (
+        <svg className="w-2.5 h-2.5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M5.5 2L18.5 12L12.5 13.5L16 21L13 22.5L9.5 15L5.5 19V2Z"/>
+        </svg>
+      );
+    case 'Perplexity':
+      return (
+        <svg className="w-2.5 h-2.5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm6 14.1l-6 3.75-6-3.75V8.9l6-3.75 6 3.75v7.2zM11 9h2v6h-2V9z"/>
+        </svg>
+      );
+    default:
+      return null;
+  }
+};
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -180,10 +228,11 @@ export const SkillsSection: React.FC = () => {
                 {block.items.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] uppercase rounded-sm border border-[#E2DDD5] bg-[#FAF9F6] text-[#332F2A] group-hover:border-[#A16207]/40 group-hover:bg-[#FEF3C7] group-hover:text-[#92400E] transition-all duration-300"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-medium tracking-[0.14em] uppercase rounded-sm border border-[#E2DDD5] bg-[#FAF9F6] text-[#332F2A] group-hover:border-[#A16207]/40 group-hover:bg-[#FEF3C7] group-hover:text-[#92400E] transition-all duration-300"
                     style={{ fontFamily: "'Montserrat', sans-serif" }}
                   >
-                    {tech}
+                    {renderSkillIcon(tech)}
+                    <span>{tech}</span>
                   </span>
                 ))}
               </div>
